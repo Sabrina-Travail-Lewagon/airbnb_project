@@ -11,6 +11,8 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  config.action_mailer.default_url_options = { host: 'airbnb-sabrina-travail-lewagon.herokuapp.com' }
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
