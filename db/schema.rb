@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_093618) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_163703) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "flat_id", null: false
+    t.bigint "user_id", null: false
+    t.date "date_departure"
+    t.date "date_arrival"
+    t.integer "traveler_nb"
+    t.integer "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flat_id"], name: "index_bookings_on_flat_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -24,6 +37,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_093618) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "flat_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flat_id"], name: "index_favorites_on_flat_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "flats", force: :cascade do |t|
@@ -70,6 +92,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_093618) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "flats"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "favorites", "flats"
+  add_foreign_key "favorites", "users"
   add_foreign_key "flats", "categories"
   add_foreign_key "flats", "equipment"
   add_foreign_key "flats", "users"
