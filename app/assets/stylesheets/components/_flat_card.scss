@@ -1,0 +1,55 @@
+.flat-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  margin-top: 40px;
+}
+
+.flat-card {
+  text-decoration: none;
+  color: #222222;
+}
+
+.flat-card:hover {
+  text-decoration: none;
+  color: #222222;
+}
+.flat-card .flat-image {
+background-image: url("https://cdn.lecollectionist.com/lc/production/uploads/photos/house-1910/2018-04-30-214088d759242733859024dd8690041f.jpg?q=65");
+background-position: center;
+background-size: cover;
+height: 250px;
+border-radius: 10px;
+display: flex;
+justify-content: right;
+padding: 16px;
+}
+
+.flat-card .flat-image i {
+  font-size: 20px;
+  color: rgb(100, 100, 100);
+  -webkit-text-stroke: 1px #fff;
+}
+
+.flat-card .flat-info p {
+  margin: 0px;
+  color: rgb(140, 140, 140);
+}
+
+.flat-card .flat-info strong {
+  color: #222222;
+}
+
+.flat-card .flat-info h3 {
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
+.flat-card .flat-description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flat-card .flat-rating {
+  margin-top: 12px;
+}
