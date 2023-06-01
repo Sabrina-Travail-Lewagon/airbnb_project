@@ -24,23 +24,23 @@ data = JSON.parse(serial_airbnb)
 
 puts "Cleaning database..."
 Flat.destroy_all
-puts "Creating Equipments"
-# On va remplir les équipements
-equipements = ['Wifi', 'Machine à laver Disco', 'Lave vaisselle sanglant', 'poupée Chucky', 'Clown', 'Serviettes Serial killer', 'Couvertures']
-equipements.each do |equipement|
-  equipement = Equipment.create(name: equipement)
-end
-equipement.save
-puts "Equipments Done!"
+# puts "Creating Equipments"
+# # On va remplir les équipements
+# equipements = ['Wifi', 'Machine à laver Disco', 'Lave vaisselle sanglant', 'poupée Chucky', 'Clown', 'Serviettes Serial killer', 'Couvertures']
+# equipements.each do |equipement|
+#   equipement = Equipment.new(name: equipement)
+# end
+# equipement.save
+# puts "Equipments Done!"
 
-puts "Creating Categories"
-# On va remplir les équipements
-categories = ['Bords de mer', 'Maisons hantées', 'Campagne', 'bateaux', 'Chateau hanté', 'Maison à crime']
-categories.each do |category|
-  category = Category.create(name: category)
-end
-categorie.save
-puts "Categories Done!"
+# puts "Creating Categories"
+# # On va remplir les équipements
+# categories = ['Bords de mer', 'Maisons hantées', 'Campagne', 'bateaux', 'Chateau hanté', 'Maison à crime']
+# categories.each do |category|
+#   category = Category.new(name: category)
+# end
+# categorie.save
+# puts "Categories Done!"
 
 puts "Creating flats..."
 puts "Creating seed"
