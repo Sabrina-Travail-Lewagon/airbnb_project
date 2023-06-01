@@ -54,7 +54,7 @@ data.each do |item|
   # On instancie le flat
   flat = Flat.new(
     title: item['name'],
-    description: item['description'],
+    description: item['roomType'],
     # Autres attributs du modèle Flat
     address: item['address'],
     guest_nb: item['numberOfGuests'],
