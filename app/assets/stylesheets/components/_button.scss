@@ -1,0 +1,28 @@
+.btn-red {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 10px;
+  background: $red;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-red:hover {
+  background: $dark-red;
+  color: white;
+}
+
+.btn-grey {
+  color: black;
+  padding: 8px 24px;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-grey:hover {
+  background: $mid-grey;
+  color: black;
+  border: 1px solid black;
+}
