@@ -54,7 +54,6 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "devise" # Installation de l'authentification Devise
 gem "dotenv-rails"
 gem "cloudinary"
-gem "faker"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

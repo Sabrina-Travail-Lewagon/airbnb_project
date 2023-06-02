@@ -14,7 +14,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'json'
 require 'open-uri'
-require 'faker'
 # On va chercher le fichier
 
 
