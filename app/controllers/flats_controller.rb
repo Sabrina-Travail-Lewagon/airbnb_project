@@ -1,6 +1,8 @@
 class FlatsController < ApplicationController
   def index
     @flats = Flat.all
+    @categories = Category.all
+
   end
 
   def show
