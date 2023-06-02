@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_181203) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_102216) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,8 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_181203) do
     t.integer "guest_nb"
     t.integer "price"
     t.string "address"
-    t.integer "longitude"
-    t.integer "latitude"
+    t.float "longitude"
+    t.float "latitude"
     t.bigint "equipment_id", null: false
     t.bigint "category_id", null: false
     t.bigint "user_id", null: false
