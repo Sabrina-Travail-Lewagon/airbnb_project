@@ -50,7 +50,8 @@ puts "Categories Done!"
 puts "Creating flats..."
 puts "Creating seed"
 # On itère sur le fichier pour récupérer les éléments
-data.each do |item|
+
+data.first(10).each do |item|
   # On va charger un équipement par défaut et une catégorie par défaut
   equipment = Equipment.find_or_create_by(name: 'Default Equipment')
   category = Category.find_or_create_by(name: 'Default Category')
@@ -69,7 +70,7 @@ data.each do |item|
     latitude: item['location']['lat'],
     equipment: equipment,
     category: category,
-    owner: User.last
+    user_id: 1
   )
   # On va itérer sur le tableau des photos et les attachés
   picture_urls.each do |picture_url|
@@ -80,6 +81,7 @@ data.each do |item|
 
   # Sauvegarder l'objet Flat
   flat.save!
+  puts flat.title
 end
 
 puts "Flats Done"
