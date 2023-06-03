@@ -3,3 +3,23 @@
 <a class="btn btn-red" href="#">Réserver</a>
 
 <a class="btn btn-grey" href="#">Contacter l'hôte</a>
+
+<div class="flat-cards mb-5">
+  <% @flats.each do |flat| %>
+    <%= link_to "#", class: 'flat-card' do %>
+      <div class="flat-image" style="background-image: url('<%= cl_image_path flat.photos.first.key %>');">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+      <div class="flat-description">
+        <div class="flat-info">
+          <h3><%= flat.title %></h3>
+          <p><%= flat.description %></p>
+          <p><%= flat.guest_nb %> personnes</p>
+          <p><strong><%= flat.price %> €</strong> par nuit</p>
+        </div>
+        <div class="flat-rating">
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
