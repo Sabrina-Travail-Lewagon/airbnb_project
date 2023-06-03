@@ -1,5 +1,11 @@
-<h1>Flats#index</h1>
-<i class="fa-solid fa-square-dollar"></i>
+<ul class="nav justify-content-center">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#"><%= category.name %></a>
+    </li>
+  <% end %>
+</ul>
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -7,7 +13,6 @@
         <% @flats.each do |flat| %>
           <%= link_to flat_path(flat), class: 'flat-card' do %>
             <div class="flat-image">
-
               <i class="fa-solid fa-heart"></i>
             </div>
             <div class="flat-description mt-2">
@@ -15,7 +20,7 @@
                 <h6><%= flat.address.truncate(35) %></h6>
                 <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
                 <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
-                <p id="black-color"> <i class="fa-regular fa-circle-dollar"></i><%= flat.price %> € la nuit </p>
+                <p id="black-color"><%= flat.price %> € la nuit </p>
               </div>
               <div class="flat-rating">
               </div>
@@ -26,3 +31,20 @@
     </div>
   </div>
 </div>
+
+
+<!-- Slider main container -->
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      <div class="swiper-slide">Slide 4</div>
+      <div class="swiper-slide">Slide 5</div>
+      <div class="swiper-slide">Slide 6</div>
+      <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
