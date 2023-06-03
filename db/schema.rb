@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_102216) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_03_154857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_102216) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "flat_categories", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "flat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_flat_categories_on_category_id"
+    t.index ["flat_id"], name: "index_flat_categories_on_flat_id"
+  end
+
+  create_table "flat_equipments", force: :cascade do |t|
+    t.bigint "equipment_id", null: false
+    t.bigint "flat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipment_id"], name: "index_flat_equipments_on_equipment_id"
+    t.index ["flat_id"], name: "index_flat_equipments_on_flat_id"
+  end
+
   create_table "flats", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -84,13 +102,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_102216) do
     t.string "address"
     t.float "longitude"
     t.float "latitude"
-    t.bigint "equipment_id", null: false
-    t.bigint "category_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_flats_on_category_id"
-    t.index ["equipment_id"], name: "index_flats_on_equipment_id"
     t.index ["user_id"], name: "index_flats_on_user_id"
   end
 
@@ -126,8 +140,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_102216) do
   add_foreign_key "bookings", "users"
   add_foreign_key "favorites", "flats"
   add_foreign_key "favorites", "users"
-  add_foreign_key "flats", "categories"
-  add_foreign_key "flats", "equipment"
+  add_foreign_key "flat_categories", "categories"
+  add_foreign_key "flat_categories", "flats"
+  add_foreign_key "flat_equipments", "equipment"
+  add_foreign_key "flat_equipments", "flats"
   add_foreign_key "flats", "users"
   add_foreign_key "reviews", "flats"
   add_foreign_key "reviews", "users"
