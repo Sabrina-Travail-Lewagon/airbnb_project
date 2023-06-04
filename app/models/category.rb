@@ -1,5 +1,4 @@
 class Category < ApplicationRecord
-  has_many :flats
-  belongs_to :owner, class_name: "User", foreign_key: "user_id"
-
+  has_many :flat_categories
+  has_many :flats, through: :flat_categories
 end
