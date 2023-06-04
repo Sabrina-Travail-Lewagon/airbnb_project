@@ -109,7 +109,6 @@ end
     flat.categories << category2
     flat.equipments << equipment2
     # Sauvegarder l'objet Flat
-    puts "#{flat.title} created"
   flat.save!
 end
 
