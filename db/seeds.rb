@@ -14,73 +14,73 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'json'
 require 'open-uri'
-# On va chercher le fichier
 
-
-filepath = "./app/assets/files/dataset_airbnb.json"
-
-# On lit le fichier
-serial_airbnb = File.read(filepath)
-# On le parse
-data = JSON.parse(serial_airbnb)
-
+# On nettoie la base de données
 puts "Cleaning database..."
+FlatCategory.destroy_all
+FlatEquipment.destroy_all
 Flat.destroy_all
+Equipment.destroy_all
+Category.destroy_all
 
-puts "Creating Equipments"
 # On va remplir les équipements
-equipements = ['Wifi', 'Machine à laver Disco', 'Lave vaisselle sanglant', 'poupée Chucky', 'Clown', 'Serviettes Serial killer', 'Couvertures']
-equipements.each do |equipement|
-  equipement = Equipment.new(name: equipement)
-  equipement.save
+puts "Creating Equipments"
+# On crée une liste d'équipements dans un array
+equipments = ['Wifi', 'Machine à laver Disco', 'Lave vaisselle sanglant', 'poupée Chucky', 'Clown', 'Serviettes Serial killer', 'Couvertures']
+# On itère sur l'array pour aller le mettre en BdD
+equipments.each do |equipment_name|
+  Equipment.create(name: equipment_name)
 end
-
 puts "Equipments Done!"
 
+# On va remplir les catégories
 puts "Creating Categories"
-# On va remplir les équipements
+# On crée une liste des catégories dans un array
 categories = ['Bords de mer', 'Maisons hantées', 'Campagne', 'bateaux', 'Chateau hanté', 'Maison à crime']
-categories.each do |category|
-  category = Category.new(name: category)
-  category.save
+# On itère sur l'array pour aller le mettre en BdD
+categories.each do |category_name|
+  Category.create(name: category_name)
 end
 puts "Categories Done!"
 
 puts "Creating flats..."
 puts "Creating seed"
-# On itère sur le fichier pour récupérer les éléments
+
+# On va chercher le fichier
+filepath = "./app/assets/files/dataset_airbnb.json"
+# On lit le fichier
+serial_airbnb = File.read(filepath)
+# On le parse
+data = JSON.parse(serial_airbnb)
 
 data.first(10).each do |item|
   # On va charger un équipement par défaut et une catégorie par défaut
-  equipment = Equipment.find_or_create_by(name: 'Default Equipment')
-  category = Category.find_or_create_by(name: 'Default Category')
-
-  # On va récupérer les photos, qu'on stocke dans un tableau
-  picture_urls = item['photos']
+  equipment = Equipment.find_by(name: 'Wifi')
+  category = Category.find_by(name: 'Bords de mer')
   # On instancie le flat
   flat = Flat.new(
     title: item['name'],
     description: item['roomType'],
-    # Autres attributs du modèle Flat
     address: item['address'],
     guest_nb: item['numberOfGuests'],
     price: item['pricing']['rate']['amount'],
     longitude: item['location']['lng'],
     latitude: item['location']['lat'],
-    equipment: equipment,
-    category: category,
     user_id: 1
   )
+  # On va récupérer les photos, qu'on stocke dans un tableau
+  picture_urls = item['photos']
   # On va itérer sur le tableau des photos et les attachés
   picture_urls.each do |picture_url|
     file = URI.open(picture_url['pictureUrl'])
     # Associer la photo au modèle Flat
-    flat.photos.attach(io: file, filename: picture_url['pictureUrl'], content_type: "image/png")
+    flat.photos.attach(io: file, filename: 'photo.png', content_type: 'image/png')
   end
-
+  # On lie les catégories et les équipements au flat
+  flat.categories << category
+  flat.equipments << equipment
   # Sauvegarder l'objet Flat
   flat.save!
-  puts flat.title
 end
 
 puts "Flats Done"
