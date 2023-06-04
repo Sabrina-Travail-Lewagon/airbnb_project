@@ -25,6 +25,9 @@ serial_airbnb = File.read(filepath)
 data = JSON.parse(serial_airbnb)
 
 puts "Cleaning database..."
+Booking.destroy_all
+Category.destroy_all
+Equipment.destroy_all
 Flat.destroy_all
 
 puts "Creating Equipments"
@@ -67,8 +70,6 @@ data.first(10).each do |item|
     price: item['pricing']['rate']['amount'],
     longitude: item['location']['lng'],
     latitude: item['location']['lat'],
-    equipment: equipment,
-    category: category,
     user_id: 1
   )
   # On va itérer sur le tableau des photos et les attachés

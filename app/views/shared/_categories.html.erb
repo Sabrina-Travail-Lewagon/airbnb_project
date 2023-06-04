@@ -1,0 +1,7 @@
+<ul class="nav justify-content-center">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
+    </li>
+  <% end %>
+</ul>
