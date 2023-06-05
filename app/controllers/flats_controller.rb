@@ -3,6 +3,12 @@ class FlatsController < ApplicationController
     # on définit par défaut toute la liste des flats quand la page charge
     @flats = Flat.all
     @categories = Category.all
+    @markers = @flats.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
     # si l'utilisateur cherche seulement par mots clés, alors on lance la recherhce simple par mot clé
     if params[:search].present? && (params[:arrival].first == "" || params[:departure].first == "")
       @flats = Flat.search_by_title_and_address(params[:search])
