@@ -82,6 +82,7 @@ data.first(10).each do |item|
   # Sauvegarder l'objet Flat
   flat.save!
 end
+# Deuxième liste d'appart avec d'autres catégories et equipements.
   data.first(10).each do |item|
     # On va charger un équipement par défaut et une catégorie par défaut
     equipment2 = Equipment.find_by(name: 'Wifi')
@@ -109,7 +110,7 @@ end
     flat.categories << category2
     flat.equipments << equipment2
     # Sauvegarder l'objet Flat
-  flat.save!
-end
+    flat.save!
+  end
 
 puts "Flats Done"
