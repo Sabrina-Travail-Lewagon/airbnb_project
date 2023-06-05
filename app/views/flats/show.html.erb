@@ -1,5 +1,82 @@
-<h1> Welcome to <%= @flat.title %> </h1>
+<div class="container mt-4">
+   <div class="row">
+    <div class="col">
+      <h3><%= @flat.title.capitalize %></h3>
+      <div class="text-center">
+        <div class="row justify-content-evenly">
+          <div class="col-4">
+            <p><i class="fa-sharp fa-solid fa-house"></i> <%= @flat.description %></p>
+          </div>
+          <div class="col-4">
+            <p><i class="fa-solid fa-bed"></i> <%= @flat.guest_nb %> </p>
+          </div>
+          <div class="col-4">
+            <p><i class="fa-solid fa-hand-holding-dollar"></i> <%= @flat.price %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
 
-<% @flat.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
+      </div>
+      <div class="col-4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= cl_image_tag @flat.photos.first.key, class: "d-block w-100", height: 450, crop: :mfit%>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag @flat.photos.second.key, class: "d-block w-100", height: 450, crop: :mfit %>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag @flat.photos.third.key, class: "d-block w-100", height: 450, crop: :mfit %>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag @flat.photos.fourth.key, class: "d-block w-100", height: 450, crop: :mfit %>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag @flat.photos.fifth.key, class: "d-block w-100", height: 450, crop: :mfit %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="px-5">
+        <% @flat.photos.first(6).each do |photo| %>
+          <%= cl_image_tag photo.key, height: 150, width: 200, crop: :fill %>
+        <% end %>
+        <div class="d-flex justify-content-center mt-5 me-4">
+          <button class="btn btn-grey" data-bs-toggle="modal" data-bs-target="#new_movie_modal">
+            Regarder toutes les photos
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>Plus d'information</h2>
+        <p>Equipements: </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "modal", flat: @flat %>
