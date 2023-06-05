@@ -4,5 +4,15 @@ class Flat < ApplicationRecord
   has_many :flat_categories
   has_many :categories, through: :flat_categories
   has_many :equipments, through: :flat_equipments
+  has_many :bookings
   has_many_attached :photos
+
+  include PgSearch::Model
+
+
+  pg_search_scope :search_by_title_and_address,
+                  against: [:title, :address],
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

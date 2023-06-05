@@ -11,7 +11,7 @@
       <div class="flat-cards">
         <% @flats.each do |flat| %>
           <%= link_to flat_path(flat), class: 'flat-card' do %>
-            <div class="flat-image">
+            <div class="flat-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path flat.photos.first.key %>')">
               <i class="fa-solid fa-heart"></i>
             </div>
             <div class="flat-description mt-2">

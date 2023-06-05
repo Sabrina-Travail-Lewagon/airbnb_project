@@ -2,7 +2,7 @@
   justify-content: space-between;
   align-items: center;
   background: white;
-  padding: 0px 80px;
+  padding: 0px 60px;
   color: #222222;
   border-bottom: 1px solid rgba(167, 167, 167, 0.9);
   position: sticky;
@@ -29,11 +29,41 @@
   border-radius: 50px;
   padding: 4px 8px;
   margin: 16px;
-  width: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3)
+  box-shadow: 0px 4px 8px rgba(13, 11, 11, 0.3)
+}
+
+#search {
+  border: none;
+  background-color: white;
+}
+
+#arrival, #departure {
+  border: none;
+  border-right: 1px solid rgba(160, 160, 160, 0.9);
+  width: 125px;
+  padding: 0px 8px;
+}
+
+.navbar-lewagon .date-selector {
+  height: 100%;
+  background-color: red;
+}
+
+#arrival:focus, #departure:focus, #search:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.navbar-lewagon .form-control:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .navbar-lewagon .searchbar p {
@@ -48,6 +78,7 @@
   color: white;
   padding: 8px 8px;
   text-align: center;
+  border: none;
 }
 
 .navbar-lewagon .dropdown {

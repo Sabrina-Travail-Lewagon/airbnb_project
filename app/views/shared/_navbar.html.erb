@@ -8,14 +8,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="searchbar">
-      <div>
-        <p>Cherchez un appartement</p>
-      </div>
-      <div class="search-icon">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
+    <%= form_with url: root_path, method: :get, class: "d-flex searchbar" do |form| %>
+      <%= form.date_field :arrival %>
+      <%= form.date_field :departure %>
+      <%= form.text_field :search %>
+      <%= button_tag(type: "submit", class: "search-icon") do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    <% end %>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
