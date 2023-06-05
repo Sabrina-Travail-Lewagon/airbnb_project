@@ -47,7 +47,7 @@ puts "Creating flats..."
 puts "Creating seed"
 
 # On va chercher le fichier
-filepath = "./app/assets/files/dataset_airbnb.json"
+filepath = "db/data/dataset_airbnb.json"
 # On lit le fichier
 serial_airbnb = File.read(filepath)
 # On le parse
