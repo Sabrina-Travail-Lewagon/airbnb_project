@@ -1,21 +1,34 @@
-<h1>Flats#index</h1>
-<i class="fa-solid fa-square-dollar"></i>
+<ul class="nav justify-content-center">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
+    </li>
+  <% end %>
+</ul>
+
 <div class="container">
   <div class="row">
     <div class="col">
       <div class="flat-cards">
         <% @flats.each do |flat| %>
           <%= link_to flat_path(flat), class: 'flat-card' do %>
-            <div class="flat-image">
-
+            <div class="flat-image" style="background-image: url('<%= cl_image_path flat.photos.first.key %>');">
               <i class="fa-solid fa-heart"></i>
             </div>
             <div class="flat-description mt-2">
               <div class="flat-info">
                 <h6><%= flat.address.truncate(35) %></h6>
                 <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
-                <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
-                <p id="black-color"> <i class="fa-regular fa-circle-dollar"></i><%= flat.price %> € la nuit </p>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
+                  </div>
+                <div class="row justify-content-between">
+                  <div class="col-8">
+                    <p id="black-color"><%= flat.price %> / nuit </p>
+                  </div>
+                </div>
+                </div>
               </div>
               <div class="flat-rating">
               </div>
