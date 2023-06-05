@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'bookings/new'
+  get 'bookings/create'
+  get 'bookings/show'
   devise_for :users
   root to: "flats#index"
   resources :flats, only: [:index, :new, :create, :show]
