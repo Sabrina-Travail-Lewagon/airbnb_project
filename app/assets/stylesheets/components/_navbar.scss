@@ -2,7 +2,7 @@
   justify-content: space-between;
   align-items: center;
   background: white;
-  padding: 0px 80px;
+  padding: 0px 60px;
   color: #222222;
   border-bottom: 1px solid rgba(167, 167, 167, 0.9);
   position: sticky;
@@ -35,15 +35,16 @@
   box-shadow: 0px 4px 8px rgba(13, 11, 11, 0.3)
 }
 
-.navbar-lewagon .form-control {
+#search {
   border: none;
   background-color: white;
 }
 
-#arrival_date, #departure_date {
+#arrival, #departure {
   border: none;
-  border-right: 1px solid rgba(200, 200, 200, 0.9);
-  width: 250px;
+  border-right: 1px solid rgba(160, 160, 160, 0.9);
+  width: 125px;
+  padding: 0px 8px;
 }
 
 .navbar-lewagon .date-selector {

@@ -3,7 +3,7 @@ class Flat < ApplicationRecord
   has_many :flat_equipments
   has_many :flat_categories
   has_many :categories, through: :flat_categories
-  has_many :categories, through: :flat_equipments
+  has_many :equipments, through: :flat_equipments
   has_many :bookings
   has_many_attached :photos
 
