@@ -89,17 +89,15 @@
       <div class="col-5">
         <div class="card-booking">
           <h4 class="text-center">Réservez maintenant:</h4>
-            <form action="">
-          <div class="input-group">
-            <span class="input-group-text" id="start-date-label">From:</span>
-            <input type="text" class="form-control" placeholder="12/10/2017" aria-label="start-date" aria-describedby="start-date-label">
+          <div>
+            <%= simple_form_for [@booking] do |f| %>
+              <%= f.input :date_arrival, label: "Date d'arrivée", start_year: Date.today.year, order: [:day, :month, :year] %>
+              <%= f.input :date_departure, label: "Date de départ", end_year: Date.today.year, order: [:day, :month, :year] %>
+              <%= f.input :traveler_nb, label: "Nombre d'invité(s)", collection: 1.."#{@flat.guest_nb}".to_i %>
+              <p>Total: <%= "#{@booking.date_arrival}" %></p>
+              <%= f.submit "Réserver", class: "btn btn-red" %>
+            <% end %>
           </div>
-          <div class="input-group mt-2">
-            <span class="input-group-text" id="end-date-label">To:</span>
-            <input type="text" class="form-control" placeholder="18/10/2017" aria-label="end-date" aria-describedby="start-date-label">
-          </div>
-          <input type="submit" value="Book" class="btn btn-success mt-2" style="width: 100%">
-        </form>
         </div>
       </div>
     </div>
