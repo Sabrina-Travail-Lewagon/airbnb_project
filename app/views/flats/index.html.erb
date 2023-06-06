@@ -16,7 +16,7 @@
             </div>
             <div class="flat-description mt-2">
               <div class="flat-info">
-                <h6><%= flat.address.truncate(35) %></h6>
+                <h6><%= flat.address.nil? ? "Pas d'adresse renseignée" : flat.address.truncate(35) %></h6>
                 <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
                 <div class="row justify-content-between">
                   <div class="col-4">

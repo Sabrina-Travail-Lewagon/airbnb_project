@@ -49,7 +49,7 @@ class FlatsController < ApplicationController
     if @flat.save
       @flat.category_ids = params[:flat][:categories] # Associe les catégories sélectionnées
       @flat.equipment_ids = params[:flat][:equipments] # Associe les équipements sélectionnés
-      raise
+
       redirect_to flat_path(@flat), notice: 'Le logement a été créé avec succès.'
     else
       render :new
