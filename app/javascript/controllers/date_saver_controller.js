@@ -32,7 +32,7 @@ export default class extends Controller {
     return arrival;
   };
 
-  var arrivee = captureArrival();
+  // var arrivee = captureArrival();
 
   captureDeparture(event2) {
     const departure = event2.currentTarget.value;
