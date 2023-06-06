@@ -20,7 +20,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
+
           <li class="nav-item active">
             <%= link_to "Mettre mon logement sur Airbnb", "#", class: "nav-link" %>
           </li>
@@ -29,11 +29,12 @@
               <i class="fa-solid fa-heart"></i>
             <% end %>
           </li>
+          <% if user_signed_in? %>
           <li class="nav-item dropdown">
               <i class="fa-solid fa-bars"></i>
               <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <span class="nav-user">Bonjour <%= @user.first_name %></span>
+              <span class="nav-user">Bonjour <%= current_user.first_name %></span>
               <%= link_to "Mettre mon logement sur Airbnb", new_flats_path(current_user), class: "dropdown-item" %>
               <%= link_to "Inscription", new_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Messages", "#", class: "dropdown-item" %>
