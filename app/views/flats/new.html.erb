@@ -20,8 +20,8 @@
       <%= f.input :price, :label => "Prix",
                   required: true
                   %>
-      <%= f.input :category_ids, :label => "Catégorie", collection: Category.all %>
-      <%= f.input :equipment_ids, :label => "Equipement", collection: Equipment.all %>
+      <%= f.input :category_ids, :label => "Catégorie", collection: Category.all, as: :check_boxes %>
+      <%= f.input :equipment_ids, :label => "Equipement", collection: Equipment.all, as: :check_boxes %>
     </div>
 
     <div class="form-actions">

@@ -46,9 +46,10 @@ class FlatsController < ApplicationController
     @flat.owner = current_user
     # On va attacher les photos récupérées
     @flat.photos.attach(params[:flat][:photos])
+    # raise
     if @flat.save
-      @flat.category_ids = params[:flat][:categories] # Associe les catégories sélectionnées
-      @flat.equipment_ids = params[:flat][:equipments] # Associe les équipements sélectionnés
+      @flat.category_ids = params[:flat][:category_ids] # Associe les catégories sélectionnées
+      @flat.equipment_ids = params[:flat][:equipment_ids] # Associe les équipements sélectionnés
 
       redirect_to flat_path(@flat), notice: 'Le logement a été créé avec succès.'
     else
@@ -59,7 +60,7 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:title, :description, :guest_nb, :price, :address, photos: [], category_ids: [], equipment_ids: [] )
+    params.require(:flat).permit(:title, :description, :guest_nb, :price, :address, equipment_ids: [], photos: [], category_ids: [] )
   end
 
   def empty_flats
