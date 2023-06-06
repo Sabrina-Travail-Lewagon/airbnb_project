@@ -2,7 +2,7 @@
   <% @categories.each do |category| %>
     <li class="nav-item">
     <span class="icon-nav">
-      <% image_path = asset_path("/assets/#{category.name.parameterize}.png") %>
+      <% image_path = asset_path("#{category.name.parameterize}.png") %>
       <%= image_tag(image_path) %>
     </span>
       <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
