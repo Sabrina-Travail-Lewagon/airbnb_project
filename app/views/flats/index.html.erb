@@ -1,11 +1,15 @@
+<ul class="nav justify-content-center align-middle nav-cat">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+    <span class="icon-nav">
+      <% image_path = asset_path("/assets/#{category.name.parameterize}.png") %>
+      <%= image_tag(image_path) %>
+    </span>
+      <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
+    </li>
+  <% end %>
+</ul>
 <div data-controller="map-show">
-  <ul class="nav justify-content-center">
-    <% @categories.each do |category| %>
-      <li class="nav-item">
-        <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
-      </li>
-    <% end %>
-  </ul>
   <div class="row">
     <div style="width: 100vw; height: 420px;"
       data-controller="map"
@@ -25,20 +29,13 @@
               </div>
               <div class="flat-description mt-2">
                 <div class="flat-info">
-                  <h6><%= flat.address.truncate(35) %></h6>
+                  <h6><%= flat.address.nil? ? "Pas d'adresse renseignée" : flat.address.truncate(35) %></h6>
                   <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
                   <div class="row justify-content-between">
                     <div class="col-4">
                       <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
                     </div>
-                  <div class="row justify-content-between">
-                    <div class="col-8">
-                      <p id="black-color"><%= flat.price %> / nuit </p>
-                    </div>
                   </div>
-                  </div>
-                </div>
-                <div class="flat-rating">
                 </div>
               </div>
             <% end %>
