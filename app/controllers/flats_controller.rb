@@ -19,7 +19,6 @@ class FlatsController < ApplicationController
     if params["category_query"]
       category = Category.find_by(name: params["category_query"])
       @flats = Flat.joins(:flat_categories).where(flat_categories: { category_id: category.id })
-
     end
   end
 
