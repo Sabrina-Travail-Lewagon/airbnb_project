@@ -32,6 +32,7 @@ class FlatsController < ApplicationController
     # On créer une liste avec les photos restantes, afin de pouvoir itérer sur
     # cette collection Active Storage
     @other_flats_photos = @flat.photos.drop(1)
+    @equipments = @flat.equipments
   end
 
   def new
