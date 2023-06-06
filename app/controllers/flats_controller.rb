@@ -26,7 +26,32 @@ class FlatsController < ApplicationController
     @flat = Flat.find(params[:id])
   end
 
+  def new
+    @user = current_user
+    @flat = Flat.new
+  end
+
+  def create
+    @flat = Flat.new(flat_params)
+    # On s'assure que le propriétaire du logement est l'utilisateur connecté
+    @flat.owner = current_user
+    # On va attacher les photos récupérées
+    @flat.photos.attach(params[:flat][:photos])
+    if @flat.save
+      @flat.category_ids = params[:flat][:categories] # Associe les catégories sélectionnées
+      @flat.equipment_ids = params[:flat][:equipments] # Associe les équipements sélectionnés
+      raise
+      redirect_to flat_path(@flat), notice: 'Le logement a été créé avec succès.'
+    else
+      render :new
+    end
+  end
+
   private
+
+  def flat_params
+    params.require(:flat).permit(:title, :description, :guest_nb, :price, :address, photos: [], category_ids: [], equipment_ids: [] )
+  end
 
   def empty_flats
     if params[:search].present?
