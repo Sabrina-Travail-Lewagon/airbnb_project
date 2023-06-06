@@ -1,40 +1,50 @@
-<ul class="nav justify-content-center">
+<ul class="nav justify-content-center align-middle nav-cat">
   <% @categories.each do |category| %>
     <li class="nav-item">
+    <span class="icon-nav">
+      <% image_path = asset_path("#{category.name.parameterize}.png") %>
+      <%= image_tag(image_path) %>
+    </span>
       <%= link_to category.name, flats_path(category_query: category.name), class: "nav-link active" %>
     </li>
   <% end %>
 </ul>
-<div class="container">
+<div data-controller="map-show">
   <div class="row">
-    <div class="col">
-      <div class="flat-cards">
-        <% @flats.each do |flat| %>
-          <%= link_to flat_path(flat), class: 'flat-card' do %>
-            <div class="flat-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path flat.photos.first.key %>')">
-              <i class="fa-solid fa-heart"></i>
-            </div>
-            <div class="flat-description mt-2">
-              <div class="flat-info">
-                <h6><%= flat.address.truncate(35) %></h6>
-                <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
-                <div class="row justify-content-between">
-                  <div class="col-4">
-                    <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
-                  </div>
-                <div class="row justify-content-between">
-                  <div class="col-8">
-                    <p id="black-color"><%= flat.price %> / nuit </p>
+    <div style="width: 100vw; height: 420px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-map-show-target="map"
+      class="col-12"></div>
+  </div>
+  <div class="container" data-map-show-target="grid">
+    <div class="row">
+      <div class="col">
+        <div class="flat-cards">
+          <% @flats.each do |flat| %>
+            <%= link_to flat_path(flat), class: 'flat-card' do %>
+              <div class="flat-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path flat.photos.first.key %>')">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <div class="flat-description mt-2">
+                <div class="flat-info">
+                  <h6><%= flat.address.nil? ? "Pas d'adresse renseignée" : flat.address.truncate(35) %></h6>
+                  <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
+                  <div class="row justify-content-between">
+                    <div class="col-4">
+                      <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
+                    </div>
                   </div>
                 </div>
-                </div>
               </div>
-              <div class="flat-rating">
-              </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
+  <button class="btn-black"
+  data-action="click->map-show#toggle"
+  data-map-show-target="button">Afficher la carte</button>
 </div>

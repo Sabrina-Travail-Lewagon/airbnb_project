@@ -1,0 +1,18 @@
+<div class="flat-info-window">
+  <div class="flat-info-description mt-2">
+    <div class="flat-info-info">
+      <h6><%= flat.address.truncate(35) %></h6>
+      <p class="content" title="<%= flat.title %>"><%= flat.title.capitalize.truncate(35) %></p>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <p> <i class="fa-solid fa-bed"></i> <%= flat.guest_nb %> </p>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-8">
+          <p id="black-color"><%= flat.price %> / nuit </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

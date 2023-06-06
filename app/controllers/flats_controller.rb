@@ -3,6 +3,8 @@ class FlatsController < ApplicationController
     # on définit par défaut toute la liste des flats quand la page charge
     @flats = Flat.all
     @categories = Category.all
+    set_markers
+
     # si l'utilisateur cherche seulement par mots clés, alors on lance la recherhce simple par mot clé
     if params[:search].present? && (params[:arrival].first == "" || params[:departure].first == "")
       @flats = Flat.search_by_title_and_address(params[:search])
@@ -17,21 +19,52 @@ class FlatsController < ApplicationController
 
     @categories = Category.all
     if params["category_query"]
-      # On va chercher la catégorie dans le model Category
-      category = Category.where(name: params["category_query"])
-      # On récupère la liste des flats dans flat_category
-      flats_list = FlatCategory.where(category: category)
-      # On va retrouver la liste des flats dans le model Flat
-      @flats = Flat.where(id: flats_list)
+      category = Category.find_by(name: params["category_query"])
+      @flats = Flat.joins(:flat_categories).where(flat_categories: { category_id: category.id })
     end
   end
 
   def show
+    @user = current_user
     @flat = Flat.find(params[:id])
     @booking = Booking.new
+    # On créer une instance pour récupérer la première photo qui sera utilisée
+    # pour la première image du caroussel (carouse-item active)
+    @first_flat_photo = @flat.photos.first.key
+
+    # On créer une liste avec les photos restantes, afin de pouvoir itérer sur
+    # cette collection Active Storage
+    @other_flats_photos = @flat.photos.drop(1)
+    @equipments = @flat.equipments
+  end
+
+  def new
+    @user = current_user
+    @flat = Flat.new
+  end
+
+  def create
+    @flat = Flat.new(flat_params)
+    # On s'assure que le propriétaire du logement est l'utilisateur connecté
+    @flat.owner = current_user
+    # On va attacher les photos récupérées
+    @flat.photos.attach(params[:flat][:photos])
+    # raise
+    if @flat.save
+      @flat.category_ids = params[:flat][:category_ids] # Associe les catégories sélectionnées
+      @flat.equipment_ids = params[:flat][:equipment_ids] # Associe les équipements sélectionnés
+
+      redirect_to flat_path(@flat), notice: 'Le logement a été créé avec succès.'
+    else
+      render :new
+    end
   end
 
   private
+
+  def flat_params
+    params.require(:flat).permit(:title, :description, :guest_nb, :price, :address, equipment_ids: [], photos: [], category_ids: [] )
+  end
 
   def empty_flats
     if params[:search].present?
@@ -65,5 +98,16 @@ class FlatsController < ApplicationController
     @flats = @flats.joins(:bookings).where.not(
       sql_subquery, arrival: params[:arrival], departure: params[:departure]
     ).to_a.union(empty_flats)
+  end
+
+  def set_markers
+    @markers = @flats.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude,
+        flat_info_window_html: render_to_string(partial: "flat_info_window", locals: {flat: flat}),
+        custom_marker_html: render_to_string(partial: "custom_marker", locals: {flat: flat})
+      }
+    end
   end
 end

@@ -103,3 +103,12 @@
 .navbar-lewagon .shadow-border :hover {
   box-shadow: 0px 2px 4px rgba(110, 110, 110, 0.9)
 }
+
+.nav-user{
+  display: block;
+  width: 100%;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  font-weight: 400;
+  color: var(--bs-dropdown-link-color);
+  text-align: inherit;
+}

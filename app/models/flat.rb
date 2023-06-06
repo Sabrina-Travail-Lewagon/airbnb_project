@@ -7,8 +7,11 @@ class Flat < ApplicationRecord
   has_many :bookings
   has_many_attached :photos
 
-  include PgSearch::Model
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+  validates :title, :description, :address, :guest_nb, :price, presence: true
 
+  include PgSearch::Model
 
   pg_search_scope :search_by_title_and_address,
                   against: [:title, :address],
