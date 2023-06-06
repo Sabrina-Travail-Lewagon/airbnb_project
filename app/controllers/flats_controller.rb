@@ -3,12 +3,8 @@ class FlatsController < ApplicationController
     # on définit par défaut toute la liste des flats quand la page charge
     @flats = Flat.all
     @categories = Category.all
-    @markers = @flats.geocoded.map do |flat|
-      {
-        lat: flat.latitude,
-        lng: flat.longitude
-      }
-    end
+    set_markers
+
     # si l'utilisateur cherche seulement par mots clés, alors on lance la recherhce simple par mot clé
     if params[:search].present? && (params[:arrival].first == "" || params[:departure].first == "")
       @flats = Flat.search_by_title_and_address(params[:search])
@@ -70,5 +66,16 @@ class FlatsController < ApplicationController
     @flats = @flats.joins(:bookings).where.not(
       sql_subquery, arrival: params[:arrival], departure: params[:departure]
     ).to_a.union(empty_flats)
+  end
+
+  def set_markers
+    @markers = @flats.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude,
+        flat_info_window_html: render_to_string(partial: "flat_info_window", locals: {flat: flat}),
+        custom_marker_html: render_to_string(partial: "custom_marker", locals: {flat: flat})
+      }
+    end
   end
 end

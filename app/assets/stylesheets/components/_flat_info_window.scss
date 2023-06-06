@@ -1,0 +1,48 @@
+
+.flat-info-window {
+  text-decoration: none;
+  color: #222222;
+}
+
+.flat-info-window:hover {
+  text-decoration: none;
+  color: #222222;
+}
+
+.flat-info-window .flat-info-image {
+background-position: center;
+background-size: cover;
+height: 40%;
+border-radius: 10px;
+display: flex;
+justify-content: right;
+padding: 16px;
+}
+
+.flat-info-window .flat_info-image i {
+  color: rgb(100, 100, 100);
+  -webkit-text-stroke: 1px #fff;
+}
+
+.flat-info-window .flat-info-info p {
+  margin: 0px;
+  color: rgb(140, 140, 140);
+}
+
+.flat-info-window .flat-info-info h3 {
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
+.flat-info-window .flat-info-description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flat-info-window .flat-info-rating {
+  margin-top: 12px;
+}
+
+#black-color {
+  color: black
+}

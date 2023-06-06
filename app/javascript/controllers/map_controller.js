@@ -16,14 +16,19 @@ export default class extends Controller {
     })
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
+    this.element.classList.add("d-none")
   }
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
+      const popup = new mapboxgl.Popup().setHTML(marker.flat_info_window_html) // Add this
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.custom_marker_html
+      new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup) // Add this
         .addTo(this.map)
-    })
+    });
   }
 
   #fitMapToMarkers() {
