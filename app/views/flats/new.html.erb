@@ -3,22 +3,25 @@
     <h2>Mettre mon logement en location</h2>
     <%= simple_form_for(@flat) do |f| %>
     <div class="form-inputs">
-      <%= f.input :title,
+      <%= f.input :title, :label => "Titre",
                   required: true,
                   autofocus: true
                   %>
       <%= f.input :description,
                   required: true
                   %>
-      <%= f.input :address,
+      <%= f.input :address, :label => "Prix",
                   required: true
                   %>
       <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-      <%= f.input :guest_nb,
+      <%= f.input :guest_nb, :label => "Nb invités",
                   required: true
                   %>
-      <%= f.input :category_ids,  collection: Category.all %>
-      <%= f.input :equipment_ids,  collection: Equipment.all %>
+      <%= f.input :price, :label => "Prix",
+                  required: true
+                  %>
+      <%= f.input :category_ids, :label => "Catégorie", collection: Category.all %>
+      <%= f.input :equipment_ids, :label => "Equipement", collection: Equipment.all %>
     </div>
 
     <div class="form-actions">
