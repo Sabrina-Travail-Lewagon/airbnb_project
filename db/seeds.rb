@@ -20,8 +20,14 @@ puts "Cleaning database..."
 FlatCategory.destroy_all
 FlatEquipment.destroy_all
 Flat.destroy_all
+User.destroy_all
 Equipment.destroy_all
 Category.destroy_all
+# Création d'un User
+puts "Creating a User"
+user = User.create(email: "hugo.mickael@gmail.com", first_name: "Hugo", last_name: "Mickael", phone_number: "0756347898", password: "123456")
+user.save
+puts "User created"
 
 # On va remplir les équipements
 puts "Creating Equipments"
@@ -52,11 +58,11 @@ filepath = "db/data/dataset_airbnb.json"
 serial_airbnb = File.read(filepath)
 # On le parse
 data = JSON.parse(serial_airbnb)
-
-data.first(10).each do |item|
+i = 1
+data.first(5).each do |item|
   # On va charger un équipement par défaut et une catégorie par défaut
-  equipment = Equipment.find_by(name: 'Machine à laver Disco')
-  category = Category.find_by(name: 'Maisons hantées')
+  # equipment = Equipment.find_by(name: 'Machine à laver Disco')
+  # category = Category.find_by(name: 'Maisons hantées')
   # On instancie le flat
   flat = Flat.new(
     title: item['name'],
@@ -66,7 +72,9 @@ data.first(10).each do |item|
     price: item['pricing']['rate']['amount'],
     longitude: item['location']['lng'],
     latitude: item['location']['lat'],
-    user_id: 1
+    categories: Category.all.sample(2),
+    equipments: Equipment.all.sample(2),
+    owner: User.first
   )
   # On va récupérer les photos, qu'on stocke dans un tableau
   picture_urls = item['photos']
@@ -77,40 +85,46 @@ data.first(10).each do |item|
     flat.photos.attach(io: file, filename: 'photo.png', content_type: 'image/png')
   end
   # On lie les catégories et les équipements au flat
-  flat.categories << category
-  flat.equipments << equipment
+  # flat.categories << category
+  # flat.equipments << equipment
   # Sauvegarder l'objet Flat
+
   flat.save!
+  puts "Flat #{i} created"
+  i += 1
 end
 # Deuxième liste d'appart avec d'autres catégories et equipements.
-  data.first(10).each do |item|
-    # On va charger un équipement par défaut et une catégorie par défaut
-    equipment2 = Equipment.find_by(name: 'Wifi')
-    category2 = Category.find_by(name: 'Bords de mer')
-    # On instancie le flat
-    flat = Flat.new(
-      title: item['name'],
-      description: item['roomType'],
-      address: item['address'],
-      guest_nb: item['numberOfGuests'],
-      price: item['pricing']['rate']['amount'],
-      longitude: item['location']['lng'],
-      latitude: item['location']['lat'],
-      user_id: 1
-    )
-    # On va récupérer les photos, qu'on stocke dans un tableau
-    picture_urls = item['photos']
-    # On va itérer sur le tableau des photos et les attachés
-    picture_urls.each do |picture_url|
-      file = URI.open(picture_url['pictureUrl'])
-      # Associer la photo au modèle Flat
-      flat.photos.attach(io: file, filename: 'photo.png', content_type: 'image/png')
-    end
-    # On lie les catégories et les équipements au flat
-    flat.categories << category2
-    flat.equipments << equipment2
-    # Sauvegarder l'objet Flat
-    flat.save!
-  end
+  # data.first(10).each do |item|
+  #   # On va charger un équipement par défaut et une catégorie par défaut
+  #   equipment2 = Equipment.find_by(name: 'Wifi')
+  #   category2 = Category.find_by(name: 'Bords de mer')
+  #   # On instancie le flat
+  #   flat = Flat.new(
+  #     title: item['name'],
+  #     description: item['roomType'],
+  #     address: item['address'],
+  #     guest_nb: item['numberOfGuests'],
+  #     price: item['pricing']['rate']['amount'],
+  #     longitude: item['location']['lng'],
+  #     latitude: item['location']['lat'],
+  #     user_id: 1
+  #   )
+  #   # On va récupérer les photos, qu'on stocke dans un tableau
+  #   picture_urls = item['photos']
+  #   # On va itérer sur le tableau des photos et les attachés
+  #   picture_urls.each do |picture_url|
+  #     file = URI.open(picture_url['pictureUrl'])
+  #     # Associer la photo au modèle Flat
+  #     flat.photos.attach(io: file, filename: 'photo.png', content_type: 'image/png')
+  #   end
+  #   # On lie les catégories et les équipements au flat
+  #   flat.categories << category2
+  #   flat.equipments << equipment2
+  #   # Sauvegarder l'objet Flat
+  #   flat.save!
+  # end
 
-puts "Flats Done"
+puts "#{Flat.count} Flats Done"
+puts "Voici le compte utilisateur que vous pouvez utiliser :"
+puts "-------------------------------------------------------"
+puts "User crée, login : hugo.mickael@gmail, password: 123456"
