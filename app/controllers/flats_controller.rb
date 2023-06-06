@@ -23,7 +23,15 @@ class FlatsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @flat = Flat.find(params[:id])
+    # On créer une instance pour récupérer la première photo qui sera utilisée
+    # pour la première image du caroussel (carouse-item active)
+    @first_flat_photo = @flat.photos.first.key
+
+    # On créer une liste avec les photos restantes, afin de pouvoir itérer sur
+    # cette collection Active Storage
+    @other_flats_photos = @flat.photos.drop(1)
   end
 
   def new

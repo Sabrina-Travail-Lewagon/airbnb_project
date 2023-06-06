@@ -29,20 +29,13 @@
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <%= cl_image_tag @flat.photos.first.key, class: "d-block w-100", height: 450, crop: :mfit%>
+            <%= cl_image_tag @first_flat_photo, class: "d-block w-100", height: 450, crop: :mfit%>
           </div>
-          <div class="carousel-item">
-            <%= cl_image_tag @flat.photos.second.key, class: "d-block w-100", height: 450, crop: :mfit %>
-          </div>
-          <div class="carousel-item">
-            <%= cl_image_tag @flat.photos.third.key, class: "d-block w-100", height: 450, crop: :mfit %>
-          </div>
-          <div class="carousel-item">
-            <%= cl_image_tag @flat.photos.fourth.key, class: "d-block w-100", height: 450, crop: :mfit %>
-          </div>
-          <div class="carousel-item">
-            <%= cl_image_tag @flat.photos.fifth.key, class: "d-block w-100", height: 450, crop: :mfit %>
-          </div>
+          <% @other_flats_photos.each do |photo| %>
+            <div class="carousel-item">
+              <%= cl_image_tag photo.key, class: "d-block w-100", height: 450, crop: :mfit %>
+            </div>
+          <% end %>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -52,7 +45,6 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-      </div>
     </div>
     <div class="col-7">
       <div class="px-5">
