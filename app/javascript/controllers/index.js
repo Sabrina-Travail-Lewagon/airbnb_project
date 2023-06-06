@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DateSaverController from "./date_saver_controller"
+application.register("date-saver", DateSaverController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 

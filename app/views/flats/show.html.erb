@@ -11,7 +11,7 @@
             <p><i class="fa-solid fa-bed"></i> <%= @flat.guest_nb %> </p>
           </div>
           <div class="col-4">
-            <p><i class="fa-solid fa-hand-holding-dollar"></i> <%= @flat.price %></p>
+            <p id="price"><i class="fa-solid fa-hand-holding-dollar"></i> <%= @flat.price %></p>
           </div>
         </div>
       </div>
@@ -89,12 +89,12 @@
       <div class="col-5">
         <div class="card-booking">
           <h4 class="text-center">Réservez maintenant:</h4>
-          <div>
-            <%= simple_form_for @booking, data: { controller: 'flatpickr' } do |f| %>
-              <%= f.input :date_arrival, as: :string, input_html: { data: { flatpickr_target: "dateArrival" } }   %>
-              <%= f.input :date_departure, as: :string, input_html: { data: { flatpickr_target: "dateDeparture" } } %>
-              <%= f.input :traveler_nb, label: "Nombre d'invité(s)", collection: 1.."#{@flat.guest_nb}".to_i %>
-              <p>Total: <%= "#{@booking.date_arrival}" %></p>
+            <div>
+            <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr date-saver' } do |f| %>
+              <%= f.input :date_arrival, label: "Date d'arrivée:", as: :string, input_html: { data: { flatpickr_target: "dateArrival", action: "input->date-saver#captureArrival" } }%>
+              <%= f.input :date_departure,label: "Date de départ:", as: :string, input_html: { data: { flatpickr_target: "dateDeparture", action: "input->date-saver#captureDeparture" } } %>
+              <%= f.input :traveler_nb, label: "Nombre d'invité(s):", collection: 1.."#{@flat.guest_nb}".to_i %>
+              <p id="total" style="display: none";>Total: <%= "#{@flat.price}" %> Є x XXXX nuits = </p>
               <%= f.submit "Réserver", class: "btn btn-red" %>
             <% end %>
           </div>

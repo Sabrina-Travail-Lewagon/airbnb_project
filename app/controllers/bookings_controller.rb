@@ -10,11 +10,12 @@ class BookingsController < ApplicationController
     @booking.flat = @flat
     @booking.customer = @user
     @booking.save
-    redirect_to flat_path(@garden)
+    redirect_to flat_path(@flat)
   end
 
   def show
-    @bookings = Booking.all
+    @user = current_user
+    @bookings = Booking.where(customer: @user)
   end
 
   private
