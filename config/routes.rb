@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   get 'users/:id/flats/new', to: "flats#new", as: "new_flats"
   post 'flats', to: 'flats#create'
+  get 'users/:id/bookings/index', to: "bookings#index", as: "my_bookings"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

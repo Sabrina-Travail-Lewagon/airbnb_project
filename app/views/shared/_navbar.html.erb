@@ -35,7 +35,7 @@
               <span class="nav-user">Bonjour <%= current_user.first_name %></span>
               <%= link_to "Mettre mon logement sur Airbnb", new_flats_path(current_user), class: "dropdown-item" %>
               <%= link_to "Messages", "#", class: "dropdown-item" %>
-              <%= link_to "Voyages", "#", class: "dropdown-item" %>
+              <%= link_to "Voyages", my_bookings_path(current_user), class: "dropdown-item" %>
               <%= link_to "Aide", "#", class: "dropdown-item" %>
               <%= link_to "Sign out", destroy_user_session_path, :method => :get, class: "dropdown-item" %>
             <% else %>

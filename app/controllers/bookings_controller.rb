@@ -9,11 +9,14 @@ class BookingsController < ApplicationController
     @user = current_user
     @booking.flat = @flat
     @booking.customer = @user
-    @booking.save
-    redirect_to flat_path(@flat)
+    if @booking.save
+      redirect_to my_bookings_path(current_user)
+    else
+      render flat_path(@flat), status: :unprocessable_entity
+    end
   end
 
-  def show
+  def index
     @user = current_user
     @bookings = Booking.where(customer: @user)
   end
