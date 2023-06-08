@@ -9,6 +9,7 @@ class BookingsController < ApplicationController
     @user = current_user
     @booking.flat = @flat
     @booking.customer = @user
+    @booking.status = "Pending" # Par défaut tout booking est en attente
     if @booking.save
       redirect_to my_bookings_path(current_user)
     else
