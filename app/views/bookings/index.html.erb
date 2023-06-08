@@ -3,17 +3,22 @@
     <h2 class="mt-2">Mes réservations: </h2>
     <div class="col-12 my-3">
       <% @bookings.each do |booking| %>
-        <div class="card-product my-2">
-          <%= cl_image_tag booking.flat.photos.first.key, height: 200, width: 250, crop: :mfit %>
-          <div class="card-product-infos">
-            <h3 class="text-center"><%= booking.flat.title.capitalize %></h3>
-            <p class ="text-center">Du: <%= booking.date_arrival %> au <%= booking.date_departure %></p>
-            <p><%= booking.flat.address %></p>
-            <p><%= booking.flat.description %></p>
+        <% if booking.status == "Approuved" %>
+          <div class="card-product my-2">
+            <%= cl_image_tag booking.flat.photos.first.key, height: 200, width: 250, crop: :mfit %>
+            <div class="card-product-infos">
+              <span class="card-status"><%= booking.status %></span>
+              <h3 class="text-center"><%= booking.flat.title.capitalize %></h3>
+              <p class ="text-center">Du: <%= booking.date_arrival %> au <%= booking.date_departure %></p>
+              <p><%= booking.flat.address %></p>
+              <p><%= booking.flat.description %></p>
+            </div>
           </div>
-        </div>
+        <% elsif booking.status == "Pending" %>
+          <p>Votre réservation est en attente de validation !</p>
         <% end %>
-      </div>
+      <% end %>
+        </div>
     </div>
   </div>
 </div>
