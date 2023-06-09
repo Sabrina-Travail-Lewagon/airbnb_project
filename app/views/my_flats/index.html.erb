@@ -1,9 +1,13 @@
-<div class="container">
-  <h1>My flats</h1>
+<div class="container mt-4">
+  <h1>Mes Logements</h1>
   <div class="row">
-    <% @myflats.each do |flat| %>
-      <p><%= flat.title %></p>
-      <%= link_to 'Voir', my_flat_path(flat) %>
-    <% end %>
+  <% @myflats.each do |flat| %>
+    <div class="card-product my-2">
+      <div class="card-product-infos">
+          <h2><%= flat.title %></h2>
+          <p><%= flat.description %></p>
+          <%= link_to 'Voir la maison', my_flat_path(flat) %>
+      </div>
   </div>
+  <% end %>
 </div>
