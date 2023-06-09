@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>My flats</h1>
+  <div class="row">
+    <% @myflats.each do |flat| %>
+      <p><%= flat.title %></p>
+      <%= link_to 'Voir', my_flat_path(flat) %>
+    <% end %>
+  </div>
+</div>
