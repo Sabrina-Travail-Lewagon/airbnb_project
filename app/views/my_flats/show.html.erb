@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Show</h1>
+  <div class="row">
+    <%= @myflat.title %>
+    <ul>
+      <li>
+        <% @bookings.each do |booking| %>
+          <%= booking.user_id %>
+          <%= booking.date_arrival %>
+          <%= booking.date_departure %>
+          <%= booking.status %>
+          <%= link_to "Approved", approved_booking_path(booking), data: {turbo_method: :patch} %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

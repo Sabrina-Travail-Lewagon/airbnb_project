@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :flats
+  has_many :bookings
   validates :first_name, :last_name, :email, :phone_number, presence: true
   validates :phone_number, uniqueness: true # Téléphone doit être unique
   # On doit avoir qu'un unique prenom et nom combiné
