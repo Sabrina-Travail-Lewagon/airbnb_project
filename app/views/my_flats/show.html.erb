@@ -1,17 +1,15 @@
 <div class="container">
   <h1>Show</h1>
   <div class="row">
-    <%= @myflat.title %>
-    <ul>
-      <li>
-        <% @bookings.each do |booking| %>
-          <%= booking.user_id %>
-          <%= booking.date_arrival %>
-          <%= booking.date_departure %>
-          <%= booking.status %>
-          <%= link_to "Approved", approved_booking_path(booking), data: {turbo_method: :patch} %>
-        <% end %>
-      </li>
-    </ul>
+    <h3><%= @myflat.title %></h3>
+    <% @bookings.each do |booking| %>
+      <div class="card">
+          <p>Date d'arrivée : <%= booking.date_arrival %></p>
+          <p>Date de départ : <%= booking.date_departure %></p>
+          <p>Nb de personnes : <%= booking.traveler_nb %></p>
+          <span>status : <%= booking.status %></span>
+          <%= link_to "Approved", approved_booking_path(booking), data: {turbo_method: :patch}, class: "btn btn-primary" %>
+      </div>
+      <% end %>
   </div>
 </div>
