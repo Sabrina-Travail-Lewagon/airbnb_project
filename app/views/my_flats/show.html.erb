@@ -1,15 +1,28 @@
-<div class="container">
-  <h1>Show</h1>
+<div class="container mt-4">
+  <h2>Mes demandes de réservations:</h2>
   <div class="row">
-    <h3><%= @myflat.title %></h3>
-    <% @bookings.each do |booking| %>
-      <div class="card">
-          <p>Date d'arrivée : <%= booking.date_arrival %></p>
-          <p>Date de départ : <%= booking.date_departure %></p>
-          <p>Nb de personnes : <%= booking.traveler_nb %></p>
-          <span>status : <%= booking.status %></span>
-          <%= link_to "Approved", approved_booking_path(booking), data: {turbo_method: :patch}, class: "btn btn-primary" %>
-      </div>
-      <% end %>
+    <div class="col-8">
+      <h3 class="text-center my-3"><%= @myflat.title %></h3>
+      <% @bookings.each do |booking| %>
+        <div class="card my-2">
+          <div class="d-flex justify-content-evenly">
+            <div class="col-5 p-2">
+              <p>Date d'arrivée : <%= booking.date_arrival %></p>
+              <p>Nombreb de personnes : <%= booking.traveler_nb %></p>
+            </div>
+            <div class="col-5 p-2">
+              <p>Date de départ : <%= booking.date_departure %></p>
+              <p>Status :
+              <% if booking.status == "Pending"%>
+                <span id="pending">En attente <i class="fa-regular fa-circle-question"></i></span>
+                <%= link_to "Accepter la réservation", approved_booking_path(booking), data: {turbo_method: :patch}, class: "btn btn-red" %>
+              <% else booking.status =="Approved" %>
+                <span id="accepted">Acceptée <i class="fa-solid fa-check"></i></p></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+    </div>
   </div>
 </div>
