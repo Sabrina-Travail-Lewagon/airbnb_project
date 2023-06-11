@@ -39,9 +39,27 @@
 
 .card-status {
   position: relative;
-  top: 3px;
-  left: 866px;
+  top: 2px;
+  left: 470px;
   background-color: green;
+  padding: 7px 20px;
+  border-radius: 37px;
+  color: #fff;
+}
+
+#pending {
+  color: rgb(202, 135, 19)
+}
+
+#accepted {
+  color:rgb(135, 208, 19)
+}
+
+.card-pending {
+  position: relative;
+  top: 2px;
+  left: 470px;
+  background-color: rgb(202, 135, 19);
   padding: 7px 20px;
   border-radius: 37px;
   color: #fff;

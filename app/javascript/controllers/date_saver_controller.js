@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="date-saver"
 export default class extends Controller {
+  static targets = ["arrival", "departure", "total", "price"]
+
   connect() {
     console.log("test date saver stim");
     // let arrival = document.querySelector("#booking_date_arrival");
@@ -24,19 +26,32 @@ export default class extends Controller {
     //     let nights = departureString - arrivalString;
     //     console.log(nights);
     //   });
+    // console.log(this.arrivalTarget.value)
+
+    // if (this.arrivalTarget.value) {
+    //   console.log("ok")
+    // }
+    // console.log(this.priceTarget.innerText);
     };
 
-  captureArrival(event) {
-    const arrival = event.currentTarget.value;
-    console.log(arrival);
-    return arrival;
-  };
+    calculTotal() {
+      // console.log("methode calcul total");
+      // console.log(this.arrivalTarget.value);
+      // console.log(this.departureTarget.value);
+      // console.log(this.priceTarget.attributes.price.value);
+      // console.log(this.totalTarget);
 
-  // var arrivee = captureArrival();
-
-  captureDeparture(event2) {
-    const departure = event2.currentTarget.value;
-    console.log(departure);
-    console.log(arrivee);
+      if (this.arrivalTarget.value && this.departureTarget.value) {
+        const arrivalDate = new Date(this.arrivalTarget.value);
+        const departureDate = new Date(this.departureTarget.value);
+        const pricePerNight = Number.parseInt(this.priceTarget.attributes.price.value, 10);
+        const totalPlaceholder = this.totalTarget;
+        const daysInMilliseconds = Math.abs(departureDate - arrivalDate);
+        const totalDays = Math.ceil(daysInMilliseconds / (1000*60*60*24));
+        const totalPrice = totalDays * pricePerNight;
+        totalPlaceholder.innerHTML = `Total: ${pricePerNight}Є x ${totalDays} nuits = <span id="total-price">${totalPrice}Є</span>`;
+        // totalPlaceholder.classList.remove("d-none")
+        totalPlaceholder.style.opacity = 1;
+      }
+    };
   };
-};
