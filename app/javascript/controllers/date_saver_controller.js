@@ -34,19 +34,24 @@ export default class extends Controller {
     // console.log(this.priceTarget.innerText);
     };
 
-  calculTotal() {
-    console.log("calcul total");
-    if (this.arrivalTarget.value && this.departureTarget.value) {
-      let arrivalDate = new Date(this.arrivalTarget.value);
-      let departureDate = new Date(this.departureTarget.value);
-      // console.log(arrivalDate);
-      // console.log(departureDate);
-      let totalDays = Math.abs(departureDate-arrivalDate);
-      const days = Math.ceil(totalDays/(1000*60*60*24));
-      // console.log(days);
-      console.log(this.priceTarget)
-      // let price = Number.parseInt(this.priceTarget.price, 10);
-      // console.log(price);
-    }
+    calculTotal() {
+      // console.log("methode calcul total");
+      // console.log(this.arrivalTarget.value);
+      // console.log(this.departureTarget.value);
+      // console.log(this.priceTarget.attributes.price.value);
+      // console.log(this.totalTarget);
+
+      if (this.arrivalTarget.value && this.departureTarget.value) {
+        const arrivalDate = new Date(this.arrivalTarget.value);
+        const departureDate = new Date(this.departureTarget.value);
+        const pricePerNight = Number.parseInt(this.priceTarget.attributes.price.value, 10);
+        const totalPlaceholder = this.totalTarget;
+        const daysInMilliseconds = Math.abs(departureDate - arrivalDate);
+        const totalDays = Math.ceil(daysInMilliseconds / (1000*60*60*24));
+        const totalPrice = totalDays * pricePerNight;
+        totalPlaceholder.innerHTML = `Total: ${pricePerNight}Є x ${totalDays} nuits = <span id="total-price">${totalPrice}Є</span>`;
+        // totalPlaceholder.classList.remove("d-none")
+        totalPlaceholder.style.opacity = 1;
+      }
+    };
   };
-};
