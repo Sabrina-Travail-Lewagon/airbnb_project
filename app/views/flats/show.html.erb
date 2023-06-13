@@ -105,9 +105,9 @@
             <h4 class="text-center">Réservez maintenant:</h4>
               <div>
               <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr date-saver' } do |f| %>
-                <%= f.input :date_arrival, label: "Date d'arrivée:", as: :string, input_html: { data: { flatpickr_target: "dateArrival", date_saver_target: "arrival"} }%>
+                <%= f.input :date_arrival, label: "Date d'arrivée:", as: :string, input_html: { data: { flatpickr_target: "dateArrival", action: "input->date-saver#calculTotal", date_saver_target: "arrival"} }%>
                 <%= f.input :date_departure,label: "Date de départ:", as: :string, input_html: { data: { flatpickr_target: "dateDeparture", action: "input->date-saver#calculTotal", date_saver_target: "departure"} } %>
-                <%= f.input :traveler_nb, label: "Nombre d'invité(s):", collection: 1.."#{@flat.guest_nb}".to_i %>
+                <%= f.input :traveler_nb, label: "Nombre d'invité(s):", collection: 1.."#{@flat.guest_nb}".to_i, input_html: { data: { action: "input->date-saver#calculTotal", date_saver_target: "guest" } } %>
                 <%= f.label "price", data: { "date-saver-target" => "price" }, class: "d-none", id: "pricetag", price: "#{@flat.price}" %>
                 <p id="total" data-date-saver-target="total" class="" ></p>
                 <%= f.submit "Réserver", class: "btn btn-red" %>
