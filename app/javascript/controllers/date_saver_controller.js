@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="date-saver"
 export default class extends Controller {
-  static targets = ["arrival", "departure", "total", "price"]
+  static targets = ["arrival", "departure", "total", "price", "guest"]
 
   connect() {
     console.log("test date saver stim");
@@ -41,7 +41,7 @@ export default class extends Controller {
       // console.log(this.priceTarget.attributes.price.value);
       // console.log(this.totalTarget);
 
-      if (this.arrivalTarget.value && this.departureTarget.value) {
+      if (this.arrivalTarget.value && this.departureTarget.value && this.guestTarget.value) {
         const arrivalDate = new Date(this.arrivalTarget.value);
         const departureDate = new Date(this.departureTarget.value);
         const pricePerNight = Number.parseInt(this.priceTarget.attributes.price.value, 10);
