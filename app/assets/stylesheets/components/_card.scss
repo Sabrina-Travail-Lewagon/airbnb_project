@@ -13,6 +13,11 @@
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
+
+    &:hover {
+      transition: all .1s ease-in-out;
+      transform: scale(1.05);
+    }
 }
 
 .card-product img {
@@ -48,18 +53,18 @@
 }
 
 #pending {
-  color: rgb(202, 135, 19)
+  color: rgb(200, 120, 20)
 }
 
 #accepted {
-  color:rgb(135, 208, 19)
+  color:green;
 }
 
 .card-pending {
   position: relative;
   top: 2px;
   left: 470px;
-  background-color: rgb(202, 135, 19);
+  background-color: rgb(200, 120, 20);
   padding: 7px 20px;
   border-radius: 37px;
   color: #fff;

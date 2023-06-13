@@ -1,27 +1,29 @@
 <div class="container mt-4">
   <h2>Mes demandes de réservations:</h2>
-  <div class="row">
-    <div class="col-8">
+  <div class="row justify-content-center">
       <h3 class="text-center my-3"><%= @myflat.title %></h3>
       <% @bookings.each do |booking| %>
-        <div class="card my-2">
-          <div class="d-flex justify-content-evenly">
-            <div class="col-5 p-2">
-              <p>Date d'arrivée : <%= booking.date_arrival %></p>
-              <p>Nombreb de personnes : <%= booking.traveler_nb %></p>
-            </div>
-            <div class="col-5 p-2">
-              <p>Date de départ : <%= booking.date_departure %></p>
-              <p>Status :
-              <% if booking.status == "Pending"%>
-                <span id="pending">En attente <i class="fa-regular fa-circle-question"></i></span>
-                <%= link_to "Accepter la réservation", approved_booking_path(booking), data: {turbo_method: :patch}, class: "btn btn-red" %>
-              <% else booking.status =="Approved" %>
-                <span id="accepted">Acceptée <i class="fa-solid fa-check"></i></p></span>
-              <% end %>
+        <div class="col-8">
+          <div class="card-product my-2">
+            <%= cl_image_tag booking.flat.photos.first.key, height: 200, width: 250, crop: :mfit %>
+            <div class="d-flex justify-content-between">
+              <div class="col-6 me-3 px-4 py-3">
+                <p>Arrivée: <%= booking.date_arrival %></p>
+                <p>Nb d'invités: <%= booking.traveler_nb %></p>
+              </div>
+              <div class="col-6 px-4 py-3">
+                <p>Départ: <%= booking.date_departure %></p>
+                <p>Status:
+                <% if booking.status == "Pending"%>
+                  <span id="pending">En attente <i class="fa-regular fa-circle-question"></i></span>
+                  <%= link_to "Accepter la réservation", approved_booking_path(booking), data: {turbo_method: :patch}, class: "btn btn-red mt-3" %>
+                <% else booking.status =="Approved" %>
+                  <span id="accepted">Acceptée <i class="fa-solid fa-check"></i></p></span>
+                <% end %>
+              </div>
+              </div>
             </div>
           </div>
-        </div>
         <% end %>
     </div>
   </div>

@@ -33,7 +33,7 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <% if user_signed_in? %>
               <span class="nav-user">Bonjour <%= current_user.first_name %></span>
-              <%= link_to "Mettre mon logement sur Airbnb", new_flats_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Mettre mon logement", new_flats_path(current_user), class: "dropdown-item" %>
               <%= link_to "Messages", "#", class: "dropdown-item" %>
               <%= link_to "Voyages", bookings_path, class: "dropdown-item" %>
               <%= link_to "Mes Apparts", my_flats_path, class: "dropdown-item" %>
