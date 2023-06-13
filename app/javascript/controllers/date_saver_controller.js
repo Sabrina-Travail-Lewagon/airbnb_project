@@ -5,7 +5,10 @@ export default class extends Controller {
   static targets = ["arrival", "departure", "total", "price", "guest"]
 
   connect() {
-    console.log("test date saver stim");
+    // console.log("test date saver stim");
+    // if (this.guestTarget.value) {
+    //   console.log(this.guestTarget.value);
+    // }
     // let arrival = document.querySelector("#booking_date_arrival");
     // if (arrival) {
     //   arrival.addEventListener("input", (event) => {
@@ -49,9 +52,13 @@ export default class extends Controller {
         const daysInMilliseconds = Math.abs(departureDate - arrivalDate);
         const totalDays = Math.ceil(daysInMilliseconds / (1000*60*60*24));
         const totalPrice = totalDays * pricePerNight;
+        totalPlaceholder.style.opacity = 0;
         totalPlaceholder.innerHTML = `Total: ${pricePerNight}Є x ${totalDays} nuits = <span id="total-price">${totalPrice}Є</span>`;
         // totalPlaceholder.classList.remove("d-none")
         totalPlaceholder.style.opacity = 1;
+      } else {
+        const totalPlaceholder = this.totalTarget;
+        totalPlaceholder.style.opacity = 0;
       }
     };
   };
