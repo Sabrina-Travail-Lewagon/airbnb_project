@@ -5,8 +5,8 @@
     <div class="col-3 text-center">
       <div class="card-product-myflat my-2">
         <div class="my-flat-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path flat.photos.first.key %>')">
-          <div>
-            <h3><%= flat.title %></h3>
+          <div class="card-product-myflat-content">
+            <h3><%= flat.title.truncate(40) %></h3>
             <p class="mt-4"><%= flat.address %></p>
             <%= link_to 'Voir les réservations', my_flat_path(flat), class:"btn btn-red mt-3" %>
           </div>

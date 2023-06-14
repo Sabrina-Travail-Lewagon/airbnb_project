@@ -70,14 +70,32 @@
 }
 
 .card-product-myflat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background: white;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
-
+  border-radius: 10px;
   &:hover {
     transition: all .1s ease-in-out;
     transform: scale(1.05);
   }
+  height: 250px;
 }
+
+.card-product-myflat-content {
+  margin: 0 auto;
+}
+
+.card-product-myflat-content p{
+  font-size: 12px;
+}
+
+.card-product-myflat-content h3{
+  font-size: 20px;
+}
+
 
 .card-product-mybook {
   overflow: hidden;

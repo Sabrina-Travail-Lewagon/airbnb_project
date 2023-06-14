@@ -1,10 +1,11 @@
 .btn-red {
   color: white;
-  padding: 8px 24px;
+  padding: 8px 20px;
   border-radius: 10px;
   background: $red;
   transition: background 0.3s ease;
   cursor: pointer;
+  font-size: 13px !important;
 }
 
 .btn-red:hover {
